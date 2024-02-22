@@ -4,8 +4,11 @@ showSlides();
 
 function showSlides() {
   let i;
-  let slides = document.querySelector('.slide');
-  let dotsContainer = document.querySelector('#dot-container');
+
+  // ! Breaks when using querySelector instead of getElementsByClassName and getElementById for some reason.
+  let slides = document.getElementsByClassName('slide');
+  let dotsContainer = document.getElementById('dot-container');
+
   let dots = [];
   clearTimeout();
 
