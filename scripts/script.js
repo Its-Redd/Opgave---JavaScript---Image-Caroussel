@@ -1,11 +1,32 @@
 let dotContainer = document.querySelector('#dot-container');
 let slideShow = document.querySelector('.slideshow-container');
 let slideIndex = 0;
+let interval;
 
 createDots();
 showSlide();
 
-// for each image in the carousel, create a dot and append it to the dot container div
+// button to move to the next slide in the carousel and increment the slideIndex variable by 1
+document.querySelector('.left').addEventListener('click', function () {
+  slideIndex++;
+  if (slideIndex > slideShow.children.length - 1) {
+    slideIndex = 0;
+  }
+  showSlide();
+  clearInterval(interval);
+});
+
+// button to move to the previous slide in the carousel and decrement the slideIndex variable by 1
+document.querySelector('.right').addEventListener('click', function () {
+  slideIndex--;
+  if (slideIndex < 0) {
+    slideIndex = slideShow.children.length - 1;
+  }
+  showSlide();
+  clearInterval(interval);
+});
+
+// createDots function will create a dot for each image in the carousel and append it to the dot container div
 function createDots() {
   for (let i = 0; i < slideShow.children.length; i++) {
     let dot = document.createElement('span');
@@ -41,4 +62,4 @@ function showSlide() {
   }
 }
 
-setInterval(showSlide, 3000);
+interval = setInterval(showSlide, 3000);
