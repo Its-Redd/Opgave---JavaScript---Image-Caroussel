@@ -1,30 +1,9 @@
 let dotContainer = document.querySelector('#dot-container');
 let slideShow = document.querySelector('.slideshow-container');
 let slideIndex = 0;
+let slides = slideShow.children;
+let dots = dotContainer.children;
 let interval;
-
-createDots();
-showSlide();
-
-// button to move to the next slide in the carousel and increment the slideIndex variable by 1
-document.querySelector('.left').addEventListener('click', function () {
-  slideIndex++;
-  if (slideIndex > slideShow.children.length - 1) {
-    slideIndex = 0;
-  }
-  showSlide();
-  clearInterval(interval);
-});
-
-// button to move to the previous slide in the carousel and decrement the slideIndex variable by 1
-document.querySelector('.right').addEventListener('click', function () {
-  slideIndex--;
-  if (slideIndex < 0) {
-    slideIndex = slideShow.children.length - 1;
-  }
-  showSlide();
-  clearInterval(interval);
-});
 
 // createDots function will create a dot for each image in the carousel and append it to the dot container div
 function createDots() {
@@ -32,7 +11,7 @@ function createDots() {
     let dot = document.createElement('span');
     dot.classList.add('dot');
     dot.addEventListener('click', function () {
-      slideIndex = i;
+      slideIndex = i - 1;
       showSlide();
     });
     dotContainer.appendChild(dot);
@@ -41,10 +20,17 @@ function createDots() {
 
 // showSlide function will hide all images and remove the active class from all dots and then show the next image and add the active class to the next dot in the sequence
 function showSlide() {
-  let slides = slideShow.children;
-  let dots = dotContainer.children;
+  slideIndex++;
+  if (slideIndex < 0) {
+    slideIndex = slides.length - 1;
+  }
+
+  if (slideIndex > slides.length - 1) {
+    slideIndex = 0;
+  }
 
   for (let i = 0; i < slides.length; i++) {
+    slides[i].classList.remove('active');
     slides[i].classList.add('hidden');
   }
 
@@ -53,13 +39,24 @@ function showSlide() {
   }
 
   slides[slideIndex].classList.remove('hidden');
+  slides[slideIndex].classList.add('active');
   dots[slideIndex].classList.add('active');
-  slideIndex++;
-
-  if (slideIndex > slides.length - 1) {
-    slideIndex = 0;
-    console.log('Reset slideIndex:', slideIndex);
-  }
 }
 
+document.querySelector('.left').addEventListener('click', function () {
+  console.log('slideIndex:', slideIndex);
+  slideIndex = slideIndex - 2;
+  showSlide();
+  clearInterval(interval);
+});
+
+document.querySelector('.right').addEventListener('click', function () {
+  console.log('slideIndex:', slideIndex);
+  showSlide();
+  clearInterval(interval);
+});
+
 interval = setInterval(showSlide, 3000);
+
+createDots();
+showSlide();
