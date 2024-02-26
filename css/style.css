@@ -44,3 +44,31 @@ body {
 .hidden {
   opacity: 0;
 }
+
+#left,
+#right {
+  position: absolute;
+  top: 35%;
+  font-size: 6rem;
+  cursor: pointer;
+  z-index: 2;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+#left:hover,
+#right:hover {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#left {
+  left: 1%;
+}
+
+#right {
+  right: 1%;
+}
