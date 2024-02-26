@@ -11,27 +11,28 @@ body {
 /* Centers the img */
 .slideshow-container img {
   position: absolute;
-  width: 50%;
-  left: 25%;
-  top: 25%;
+  width: 140%;
+  left: -20%;
+  top: 0;
 }
 
 #dot-container {
   text-align: center;
   position: absolute;
-  bottom: 30%;
+  bottom: 2%;
   width: 100%;
 }
 
 .dot {
   cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
+  height: 50px;
+  width: 50px;
+  margin: 0 10px;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
-  transition: background-color 0.6s ease;
+  transition: background-color 0.2s ease;
+  z-index: 2;
 }
 
 .active,
